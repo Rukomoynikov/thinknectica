@@ -4,13 +4,13 @@
 # Если D < 0, то выводим дискриминант и сообщение "Корней нет"
 
 p "Введите коэффициент a"
-a = gets.chomp.to_i
+a = gets.chomp.to_f
 
 p "Введите коэффициент b"
-b = gets.chomp.to_i
+b = gets.chomp.to_f
 
 p "Введите коэффициент c"
-c = gets.chomp.to_i
+c = gets.chomp.to_f
 
 p "Уравнение имеет вид: #{a}x^2 + #{b}x + c = 0"
 

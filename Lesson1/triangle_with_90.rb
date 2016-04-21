@@ -19,7 +19,7 @@ gipotenuza = sides.last
 
 if gipotenuza*gipotenuza == sides[0]*sides[0] + sides[1]*sides[1]
 	p "Треугольник имеет прямой угол"
-	p "Квадрат гипотенузы ${gipotenuza*gipotenuza} равен сумме квадратов катетов ${sides[0]*sides[0] + sides[1]*sides[1]}."
+	p "Квадрат гипотенузы #{gipotenuza*gipotenuza} равен сумме квадратов катетов #{sides[0]*sides[0] + sides[1]*sides[1]}."
 elsif sides[0] == sides[1]
 	p "Этот треугольник хоть и не прямоугольный, но равнобедренный."
 else
