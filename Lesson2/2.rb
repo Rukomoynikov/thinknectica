@@ -2,10 +2,10 @@
 
 arr =[]
 
-counter = 10
+counter = 5
 while counter <= 100
-	arr.push(counter)
-	counter += 10
+	arr << counter
+	counter += 5
 end
 
 p arr

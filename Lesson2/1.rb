@@ -15,24 +15,24 @@ months = {
 	december: 31
 }
 
-for month in months
+# for month in months
+# 	days = month[1]
+# 	p "#{month[0].to_s.capitalize} have #{days} days" if days == 30
+# end
+
+# p '------------------------'
+
+# counter = 0;
+# while counter < months.length
+# 	key = months.keys[counter]
+# 	days = months[key]
+# 	p "#{key.capitalize} have #{days} days" if days == 30
+# 	counter += 1
+# end
+
+# p '-------------------------'
+
+months.each do |month|
 	days = month[1]
 	p "#{month[0].to_s.capitalize} have #{days} days" if days == 30
 end
-
-p '------------------------'
-
-counter = 0;
-while counter < months.length
-	key = months.keys[counter]
-	days = months[key]
-	p "#{key.capitalize} have #{days} days" if days == 30
-	counter += 1
-end
-
-p '-------------------------'
-
-months.each{ |month| 
-	days = month[1]
-	p "#{month[0].to_s.capitalize} have #{days} days" if days == 30
-}
