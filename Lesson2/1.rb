@@ -32,7 +32,6 @@ months = {
 
 # p '-------------------------'
 
-months.each do |month|
-	days = month[1]
-	p "#{month[0].to_s.capitalize} have #{days} days" if days == 30
+months.each do |month, days|
+	p "#{month.to_s.capitalize} have #{days} days" if days == 30
 end
