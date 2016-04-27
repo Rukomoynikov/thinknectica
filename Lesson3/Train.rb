@@ -25,20 +25,19 @@ class Train
   end
 
   def reduce_speed(speed = 10)
-    p @speed
-    @speed += speed
+    self.speed -= speed
   end
 
   def stop
-    @speed = 0
+    self.speed = 0
   end
 
-  def add_carriage
-    self.carriage_count += 1 if self.speed == 0
+  def add_carriage(count = 1)
+    self.carriage_count += count if self.speed == 0
   end
 
-  def remove_carriage
-    self.carriage_count -= 1 if self.speed == 0
+  def remove_carriage(count = 1)
+    self.carriage_count -= count if self.speed == 0
   end
 
   def move_forward
@@ -53,6 +52,14 @@ class Train
     @route.stations.at(@station_index).receive_train(self)
   end
 
-end
+  def show_station(type)
+    if type = 'previous'
+      @route.stations.at(@station_index - 1).receive_train(self)
+    elsif type == 'next'
+      @route.stations.at(@station_index + 1).receive_train(self)
+    elsif type == 'current'
+      @route.stations.at(@station_index).receive_train(self)
+    end
+  end
 
-train1 = Train.new("3PIO", "грузовой", "1")
+end
