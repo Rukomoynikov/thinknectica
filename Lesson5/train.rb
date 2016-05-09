@@ -13,21 +13,24 @@ require './modules/manufacturer'
 
 class Train
   include Manufacturer
+  @@all_trains = {}
   attr_reader :speed, :route, :index, :type, :carriages, :station_index
 
   def self.find(index)
-    train = @@all_trains.select{ |train| train.index == index}
-    train.length ? train[0] : nil
+    @@all_trains[index]
   end
 
-  @@all_trains = []
+  def self.all_trains
+    @@all_trains
+  end
+
   def initialize(index, manufacturer = "Untitled manufacturer")
     self.manufacturer = manufacturer
     @index = index
     @speed = 0
     @station_index = 0
     @carriages = []
-    @@all_trains << self
+    @@all_trains[index] = self
   end
 
   def add_speed(speed = 10)
@@ -100,12 +103,4 @@ class Train
     @station_index += num
   end
 
-end
-
-class CargoTrain < Train
-  TYPE_NAME = "Грузовой"
-end
-
-class PassengerTrain < Train
-  TYPE_NAME = "Пассажирский"
 end

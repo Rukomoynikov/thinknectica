@@ -12,10 +12,10 @@ class Station
     p @@stations_list.to_s
   end
 
-  @@stations_list = [];
+  @@stations_list = []
   def initialize(name)
-    @@stations_list << name
-    self.name = name
+    @@stations_list << self
+    @name = name
     @trains = []
   end
 
