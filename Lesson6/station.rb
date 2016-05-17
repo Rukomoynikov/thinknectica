@@ -16,7 +16,8 @@ class Station
 
   @@stations_list = []
   def initialize(name)
-    @name = name if self.class.valid_length?(1,10,name)
+    @name = name
+    valid?
     @@stations_list << self
     @trains = []
   end
@@ -47,8 +48,18 @@ class Station
   end
 
   def valid?
-    raise "Name for station #{self} is not valid" if !self.class.valid_length?(0,10,@name)
+    begin
+      validate!
+    rescue 
+      return false
+    end
     return true
+  end
+
+  private
+
+  def validate!
+    raise "Name for station #{self} is not valid" if !self.class.valid_length?(0,10,@station)
   end
   
 end

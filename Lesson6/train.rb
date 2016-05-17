@@ -30,6 +30,7 @@ class Train
     @index = index if self.class.valid_length?(1,20,index) && self.class.valid_format?(/^([a-zA-z]{3}|[0-9]{3})-?([a-zA-z]{2}|[0-9]{2})$/, index)
     @speed = 0
     @station_index = 0
+    valid?
     @carriages = []
     @@all_trains[index] = self
   end
@@ -81,11 +82,20 @@ class Train
   end
 
   def valid?
-    #скорость 0 или больше
-    #имеет производетеля
+    begin
+      validate!
+    rescue
+      return false
+    end
+    return true
+  end
+
+  private
+
+  def validate!
    raise "Speed of the train is not valid" if @speed.nil? || @speed < 0
    raise "Manufacturer is not defined" if @manufacturer.nil? || self.class.valid_length?(1,10,@manufacturer)
-   return true
+   raise "Number of traing is not valid" if !self.class.valid_length?(1,20,index) && !self.class.valid_format?(/^([a-zA-z]{3}|[0-9]{3})-?([a-zA-z]{2}|[0-9]{2})$/, index)
   end
 
   protected
@@ -113,3 +123,4 @@ class Train
   end
 
 end
+

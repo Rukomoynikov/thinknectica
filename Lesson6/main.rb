@@ -48,9 +48,9 @@ begin
 	type = gets.chomp
 	raise if type !~ /C|P/
 	if (type == "C")
-		TrainCargo.new(name)
+		p TrainCargo.new(name)
 	else
-		TrainPassenger.new(name)
+		p TrainPassenger.new(name)
 	end
 rescue
 	p "You know for creating train you have to name it and give a type"
