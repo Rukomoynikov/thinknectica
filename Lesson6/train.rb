@@ -25,12 +25,12 @@ class Train
     @@all_trains
   end
 
-  def initialize(index, manufacturer = "Untitled manufacturer")
-    self.manufacturer = manufacturer
-    @index = index if self.class.valid_length?(1,20,index) && self.class.valid_format?(/^([a-zA-z]{3}|[0-9]{3})-?([a-zA-z]{2}|[0-9]{2})$/, index)
+  def initialize(index, manufacturer = "Untitled train manufacturer")
+    @manufacturer = manufacturer
+    @index = index
     @speed = 0
     @station_index = 0
-    valid?
+    validate!
     @carriages = []
     @@all_trains[index] = self
   end
@@ -81,21 +81,22 @@ class Train
     end
   end
 
-  def valid?
+  def validate!
     begin
-      validate!
-    rescue
-      return false
+      valid?
+    rescue Exception => e
+      p "Train is not valid"
+      raise "Reason is: #{e}"
     end
     return true
   end
 
   private
 
-  def validate!
+  def valid?
    raise "Speed of the train is not valid" if @speed.nil? || @speed < 0
-   raise "Manufacturer is not defined" if @manufacturer.nil? || self.class.valid_length?(1,10,@manufacturer)
-   raise "Number of traing is not valid" if !self.class.valid_length?(1,20,index) && !self.class.valid_format?(/^([a-zA-z]{3}|[0-9]{3})-?([a-zA-z]{2}|[0-9]{2})$/, index)
+   raise "Manufacturer is not defined" if @manufacturer.nil? || !self.class.valid_length?(1,100,@manufacturer)
+   raise "Number of traing is not valid" if !self.class.valid_length?(1,20,index) || !self.class.valid_format?(/^([a-zA-z]{3}|[0-9]{3})-?([a-zA-z]{2}|[0-9]{2})$/, index)
   end
 
   protected
@@ -123,4 +124,3 @@ class Train
   end
 
 end
-

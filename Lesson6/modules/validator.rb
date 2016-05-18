@@ -2,9 +2,9 @@ module Validator
 
   def valid_length?(minimum, maximum, word)
     if word.length < minimum 
-      raise "Length of #{word} is too large"
-    elsif word.length > maximum
       raise "Length of #{word} is too small"
+    elsif word.length > maximum
+      raise "Length of #{word} is too large"
     else 
       return true
     end

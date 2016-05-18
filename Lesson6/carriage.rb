@@ -5,8 +5,9 @@ class Carriage
   extend Validator
   include Manufacturer
 
-  def initialize(manufacturer="Untitled manufacturer")
+  def initialize(manufacturer = "Untitled carriage manufacturer")
   	@manufacturer = manufacturer 
+    validate!
   end
 
   def self.debug(message)
@@ -17,9 +18,21 @@ class Carriage
     "Вагон типа #{self.class::TYPE}"
   end
 
+  def validate!
+    begin
+      valid?
+    rescue Exception => e
+      p "Carriage is not valid"
+      p "Reason is: #{e}"
+      raise
+    end
+  end
+
+  private 
+
   def valid?
     raise "Carriage havent manufacturer"  if @manufacturer.nil?
-    raise "Carriage havent type" if self.class != "PassengerCarriage" || "CargoCarriage"
+    raise "Carriage havent type" if self.class.to_s !~ /PassengerCarriage|CargoCarriage/
     return true
   end
 
