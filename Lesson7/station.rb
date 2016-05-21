@@ -1,4 +1,5 @@
 require './modules/validator'
+require './train'
 # Класс Station (Станция):
 # Имеет название, которое указывается при ее создании
 # Может принимать поезда (по одному за раз)
@@ -17,9 +18,9 @@ class Station
   @@stations_list = []
   def initialize(name)
     @name = name
-    validate!
     @@stations_list << self
     @trains = []
+    validate!
   end
 
   def receive_train(train)
@@ -32,39 +33,40 @@ class Station
     p "Поезд #{train.index} убыл c платформы #{self.name}"
   end
 
-  def trains_list(type)
+  def trains_list(type = nil)
     p "На станции #{self.name} всего #{trains.length} поездов."
     p "-------------------------------------------------------"
-    if type
+    if !type.nil?
       p "Типа #{type.capitalize} на станции всего"
       @trains.map do |train|
-        p "Поезд #{train.index} типа #{train.type}" if train.type == type
+        p "Поезд #{train.index} типа #{train::TYPE_NAME}"
       end
     else
       @trains.map do |train|
-        p "Поезд #{train.index} типа #{train.type}"
+        p "Поезд #{train.index} типа #{train}"
       end
     end
   end
 
-  def get_info_for_train(block)
-    @trains.each { |train| block.call(train) }
+  def map_trains
+  	# block.call(@trains[0])
+    # @trains.each do |train|
+    # 	return block.call(train)
+    # 	# В этом месте я не понял, если не делать return то выводится полная информация о поезде.
+    # end
+    @trains.each {|train| return yield train}
   end
 
-  def validate!
-    begin
-      valid?
-    rescue Exception => e
-      raise "Station is not valid - #{e}"
-    end
-    return true
+  def valid?
+		validate!
+	rescue
+      false
   end
 
   private
 
-  def valid?
-    p self.class.valid_length?(1,10, @name)
+  def validate!
     raise "Name for station #{self} is not valid" if !self.class.valid_length?(1,10, @name)
   end
-  
+
 end

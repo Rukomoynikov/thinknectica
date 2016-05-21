@@ -30,8 +30,8 @@ class Train
     @index = index
     @speed = 0
     @station_index = 0
-    validate!
     @carriages = []
+    validate!
     @@all_trains[index] = self
   end
 
@@ -48,7 +48,7 @@ class Train
   end
 
   def add_carriage(carriage)
-    self.add_carriage!(carriage) if carriage.class::TYPE == self.class::TYPE_NAME
+    self.add_carriage!(carriage)
   end
 
   def remove_carriage
@@ -81,22 +81,22 @@ class Train
     end
   end
 
-  def validate!
-    begin
-      valid?
-    rescue Exception => e
-      p "Train is not valid"
-      raise "Reason is: #{e}"
-    end
-    return true
+  def map_carriages
+  	@carriages.each{|carriage| yield(carriage)}
+  end
+
+  def valid?
+    validate
+    rescue
+    	false
   end
 
   private
 
-  def valid?
+  def validate!
    raise "Speed of the train is not valid" if @speed.nil? || @speed < 0
    raise "Manufacturer is not defined" if @manufacturer.nil? || !self.class.valid_length?(1,100,@manufacturer)
-   raise "Number of traing is not valid" if !self.class.valid_length?(1,20,index) || !self.class.valid_format?(/^([a-zA-z]{3}|[0-9]{3})-?([a-zA-z]{2}|[0-9]{2})$/, index)
+   raise "Number of train is not valid" if !self.class.valid_length?(1,20,@index) || !self.class.valid_format?(/^([a-zA-z]{3}|[0-9]{3})-?([a-zA-z]{2}|[0-9]{2})$/, @index)
   end
 
   protected

@@ -1,19 +1,19 @@
 module Validator
 
   def valid_length?(minimum, maximum, word)
-    if word.length < minimum 
+    if word.length < minimum
       raise "Length of #{word} is too small"
     elsif word.length > maximum
       raise "Length of #{word} is too large"
-    else 
+    else
       return true
     end
   end
 
   def valid_instance?(class_name, object)
-    if class_name == object.class
+    if class_name.to_s == object.class.to_s
       return true
-    else 
+    else
       raise "Object is not instance of #{class_name}"
     end
   end

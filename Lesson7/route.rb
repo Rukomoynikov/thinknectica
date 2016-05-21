@@ -11,11 +11,10 @@ class Route
   attr_accessor :first_station, :last_station, :stations
 
   def initialize (first_station, last_station)
-    # @first_station = first_station if self.class.valid_instance?("Station", first_station)
-    # @last_station = last_station if self.class.valid_instance?("Station", last_station)
     @first_station = first_station
     @last_station = last_station
     @stations = [@first_station, @last_station]
+    validate!
   end
 
   def add_station(station)
@@ -23,22 +22,38 @@ class Route
   end
 
   def remove_station(station)
-    # index = stations.find_index(station)
     stations.delete(station)
   end
 
   def to_s
-    p "Информиация о маршруте"
-    p "--------------"
-    p "Первая станция #{@first_station.name}"
-    stations.each{ |station| p "Промежуточная станция #{station.name}" }
-    "Последняя станция #{@last_station.name}"
+    p "Информация о маршруте"
+    p "---------------------"
+    stations.each do |station|
+    	p "Станция - #{station.name}"
+    	if station.trains.length > 0
+    		station.map_trains do |train|
+    			p "Поезд номер #{train.index}, тип #{train.class::TYPE_NAME}, количество вагонов #{train.carriages.length}"
+					train.map_carriages do |carriage, index|
+						carriage.to_s
+					end
+    		end
+    	end
+  		p ">>>>>>>>>>"
+		end
   end
 
   def valid?
-    raise "First station in route is not valid" if !self.class.valid_instance?("Station", @first_station)
-    raise "Last station in route is not valid" if !self.class.valid_instance?("Station", @last_station)
-    @stations.each{ |station| raise "Station is not type of station" if station.class != "Station"}
+  	validate!
+  		rescue
+	false
+  end
+
+  private
+
+  def validate!
+    self.class.valid_instance?('Station', @first_station)
+    self.class.valid_instance?('Station', @last_station)
+    @stations.each{ |station| raise "Station is not type of station" if !self.class.valid_instance?('Station', station) }
     return true
   end
 
