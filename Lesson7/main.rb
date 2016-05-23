@@ -1,8 +1,8 @@
-require "./train"
-require "./train_cargo"
-require "./train_passenger"
-require "./station"
-require "./route"
+require './train'
+require './train_cargo'
+require './train_passenger'
+require './station'
+require './route'
 require './carriage'
 
 require './modules/validator'
@@ -30,19 +30,19 @@ oktyabrskaya_doroga.add_station(moskva3)
 oktyabrskaya_doroga.add_station(mytishi)
 oktyabrskaya_doroga.add_station(podlipki)
 
-train1 = TrainCargo.new("111-11")
-train2 = TrainPassenger.new("AAA-aa")
+train1 = TrainCargo.new('111-11')
+train2 = TrainPassenger.new('AAA-aa')
 train1.set_route(oktyabrskaya_doroga)
 train2.set_route(oktyabrskaya_doroga)
 
-train1.add_carriage(CargoCarriage.new("Apple", 20))
-train1.add_carriage(CargoCarriage.new("IBM", 25))
-train1.add_carriage(PassengerCarriage.new("ZIL Factory", 100))
+train1.add_carriage(CargoCarriage.new('Apple', 20))
+train1.add_carriage(CargoCarriage.new('IBM', 25))
+train1.add_carriage(PassengerCarriage.new('ZIL Factory', 100))
 train1.move_forward
 
-p "---------------------------"
-p "---------------------------"
-p "---------------------------"
+p '---------------------------'
+p '---------------------------'
+p '---------------------------'
 
 oktyabrskaya_doroga.to_s
 # p "Panel for creating train:"

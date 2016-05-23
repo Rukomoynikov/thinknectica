@@ -25,17 +25,17 @@ class Station
 
   def receive_train(train)
     @trains << train
-    p "Поезд #{train.index} прибыл на платформу #{self.name}"
+    p "Поезд #{train.index} прибыл на платформу #{name}"
   end
 
   def send_train(train)
     @trains.delete(train)
-    p "Поезд #{train.index} убыл c платформы #{self.name}"
+    p "Поезд #{train.index} убыл c платформы #{name}"
   end
 
   def trains_list(type = nil)
-    p "На станции #{self.name} всего #{trains.length} поездов."
-    p "-------------------------------------------------------"
+    p "На станции #{name} всего #{trains.length} поездов."
+    p '-------------------------------------------------------'
     if !type.nil?
       p "Типа #{type.capitalize} на станции всего"
       @trains.map do |train|
@@ -49,24 +49,23 @@ class Station
   end
 
   def map_trains
-  	# block.call(@trains[0])
+    # block.call(@trains[0])
     # @trains.each do |train|
     # 	return block.call(train)
     # 	# В этом месте я не понял, если не делать return то выводится полная информация о поезде.
     # end
-    @trains.each {|train| return yield train}
+    @trains.each { |train| return yield train }
   end
 
   def valid?
-		validate!
-	rescue
-      false
+    validate!
+  rescue
+    false
   end
 
   private
 
   def validate!
-    raise "Name for station #{self} is not valid" if !self.class.valid_length?(1,10, @name)
+    raise "Name for station #{self} is not valid" unless self.class.valid_length?(1, 10, @name)
   end
-
 end

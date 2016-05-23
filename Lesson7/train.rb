@@ -25,7 +25,7 @@ class Train
     @@all_trains
   end
 
-  def initialize(index, manufacturer = "Untitled train manufacturer")
+  def initialize(index, manufacturer = 'Untitled train manufacturer')
     @manufacturer = manufacturer
     @index = index
     @speed = 0
@@ -36,11 +36,11 @@ class Train
   end
 
   def add_speed(speed = 10)
-    self.change_speed!(speed)
+    change_speed!(speed)
   end
 
   def reduce_speed(speed = -10)
-    self.change_speed!(speed)
+    change_speed!(speed)
   end
 
   def stop
@@ -48,26 +48,26 @@ class Train
   end
 
   def add_carriage(carriage)
-    self.add_carriage!(carriage)
+    add_carriage!(carriage)
   end
 
   def remove_carriage
-    self.remove_carriage!
+    remove_carriage!
   end
 
   def set_route(route)
-    self.set_route!(route)
+    set_route!(route)
   end
 
   def move_forward
     @route.stations.at(@station_index).send_train(self)
-    self.set_current_station_index!(1)
+    set_current_station_index!(1)
     @route.stations.at(@station_index).receive_train(self)
   end
 
   def move_backward
     @route.stations.at(@station_index).send_train(self)
-    self.set_current_station_index!(-1)
+    set_current_station_index!(-1)
     @route.stations.at(@station_index).receive_train(self)
   end
 
@@ -82,21 +82,21 @@ class Train
   end
 
   def map_carriages
-  	@carriages.each{|carriage| yield(carriage)}
+    @carriages.each { |carriage| yield(carriage) }
   end
 
   def valid?
     validate
-    rescue
-    	false
+  rescue
+    false
   end
 
   private
 
   def validate!
-   raise "Speed of the train is not valid" if @speed.nil? || @speed < 0
-   raise "Manufacturer is not defined" if @manufacturer.nil? || !self.class.valid_length?(1,100,@manufacturer)
-   raise "Number of train is not valid" if !self.class.valid_length?(1,20,@index) || !self.class.valid_format?(/^([a-zA-z]{3}|[0-9]{3})-?([a-zA-z]{2}|[0-9]{2})$/, @index)
+    raise 'Speed of the train is not valid' if @speed.nil? || @speed < 0
+    raise 'Manufacturer is not defined' if @manufacturer.nil? || !self.class.valid_length?(1, 100, @manufacturer)
+    raise 'Number of train is not valid' if !self.class.valid_length?(1, 20, @index) || !self.class.valid_format?(/^([a-zA-z]{3}|[0-9]{3})-?([a-zA-z]{2}|[0-9]{2})$/, @index)
   end
 
   protected
@@ -107,20 +107,19 @@ class Train
     self.route = route
   end
 
-  def change_speed(speed)
+  def change_speed(_speed)
     @speed += 10
   end
 
   def add_carriage!(carriage)
-    self.carriages << carriage if self.speed == 0
+    carriages << carriage if speed == 0
   end
 
   def remove_carriage!
-    self.carriages.shift if self.speed == 0
+    carriages.shift if speed == 0
   end
 
   def set_current_station_index!(num)
     @station_index += num
   end
-
 end

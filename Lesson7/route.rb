@@ -1,5 +1,5 @@
 require('./station.rb')
-require "./modules/validator"
+require './modules/validator'
 # Класс Route (Маршрут):
 # Имеет начальную и конечную станцию, а также список промежуточных станций. Начальная и конечная станции указываютсся при создании маршрута, а промежуточные могут добавляться между ними.
 # Может добавлять промежуточную станцию в список
@@ -10,7 +10,7 @@ class Route
   extend Validator
   attr_accessor :first_station, :last_station, :stations
 
-  def initialize (first_station, last_station)
+  def initialize(first_station, last_station)
     @first_station = first_station
     @last_station = last_station
     @stations = [@first_station, @last_station]
@@ -27,25 +27,25 @@ class Route
 
   def to_s
     p "Информация о маршруте"
-    p "---------------------"
+    p '---------------------'
     stations.each do |station|
-    	p "Станция - #{station.name}"
-    	if station.trains.length > 0
-    		station.map_trains do |train|
-    			p "Поезд номер #{train.index}, тип #{train.class::TYPE_NAME}, количество вагонов #{train.carriages.length}"
-					train.map_carriages do |carriage, index|
-						carriage.to_s
-					end
-    		end
-    	end
-  		p ">>>>>>>>>>"
-		end
+      p "Станция - #{station.name}"
+      unless station.trains.empty?
+        station.map_trains do |train|
+          p "Поезд номер #{train.index}, тип #{train.class::TYPE_NAME}, количество вагонов #{train.carriages.length}"
+          train.map_carriages do |carriage, _index|
+            carriage.to_s
+          end
+        end
+      end
+      p '>>>>>>>>>>'
+    end
   end
 
   def valid?
-  	validate!
-  		rescue
-	false
+    validate!
+  rescue
+    false
   end
 
   private
@@ -53,8 +53,7 @@ class Route
   def validate!
     self.class.valid_instance?('Station', @first_station)
     self.class.valid_instance?('Station', @last_station)
-    @stations.each{ |station| raise "Station is not type of station" if !self.class.valid_instance?('Station', station) }
-    return true
+    @stations.each { |station| raise 'Station is not type of station' unless self.class.valid_instance?('Station', station) }
+    true
   end
-
 end
