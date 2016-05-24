@@ -21,17 +21,17 @@ class Station
 
   def receive_train(train)
     @trains << train
-    p "Поезд #{train.index} прибыл на платформу #{self.name}"
+    p "Поезд #{train.index} прибыл на платформу #{name}"
   end
 
   def send_train(train)
     @trains.delete(train)
-    p "Поезд #{train.index} убыл c платформы #{self.name}"
+    p "Поезд #{train.index} убыл c платформы #{name}"
   end
 
   def trains_list(type)
-    p "На станции #{self.name} всего #{trains.length} поездов."
-    p "-------------------------------------------------------"
+    p "На станции #{name} всего #{trains.length} поездов."
+    p '-------------------------------------------------------'
     if type
       p "Типа #{type.capitalize} на станции всего"
       @trains.map do |train|
@@ -43,5 +43,4 @@ class Station
       end
     end
   end
-  
 end

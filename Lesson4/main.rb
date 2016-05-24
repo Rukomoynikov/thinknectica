@@ -1,6 +1,6 @@
-require "./train"
-require "./station"
-require "./route"
+require './train'
+require './station'
+require './route'
 require './carriage'
 
 # mode = ""
@@ -23,7 +23,7 @@ oktyabrskaya_doroga.add_station(Station.new("Москва-3"))
 oktyabrskaya_doroga.add_station(Station.new("Мытищи"))
 oktyabrskaya_doroga.add_station(Station.new("Подлипки"))
 
-train1 = CargoTrain.new("3PIO")
+train1 = CargoTrain.new('3PIO')
 train2 = PassengerTrain.new("Тысячелетний сокол")
 train1.set_route(oktyabrskaya_doroga)
 train2.set_route(oktyabrskaya_doroga)

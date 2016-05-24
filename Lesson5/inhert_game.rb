@@ -1,6 +1,6 @@
 module Speak
   def hi
-    p "HI!"
+    p 'HI!'
   end
 end
 
@@ -11,15 +11,14 @@ class Parent
     @name = "Родитель"
   end
 
- # protected
- #   attr_reader :name
- #   def private_from_parent
- #    p self.name
- #   end
+  # protected
+  #   attr_reader :name
+  #   def private_from_parent
+  #    p self.name
+  #   end
 end
 
 class Child < Parent
-
   def initialize
     @name = "Потомок"
   end

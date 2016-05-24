@@ -2,27 +2,27 @@
 # Заполнить и вывести на экран хеш, ключами которого являются названия товаров, а значением - вложенный хеш, содержащий цену за единицу товара и кол-во купленного товара. Также вывести итоговую сумму за каждый товар.
 # Вычислить и вывести на экран итоговую сумму всех покупок в "корзине".
 
-cart = Hash.new
+cart = {}
 
 loop do
-	item_in_cart = Hash.new
-	p "Введите название товара"
-	name = gets.chomp
-	break if name == "стоп"
+  item_in_cart = {}
+  p "Введите название товара"
+  name = gets.chomp
+  break if name == "стоп"
 
-	p "Цена за единицу"
-	item_in_cart[:price] = gets.chomp.to_f
+  p "Цена за единицу"
+  item_in_cart[:price] = gets.chomp.to_f
 
-	p "Количество купленного товара"
-	item_in_cart[:count] = gets.chomp.to_f
+  p "Количество купленного товара"
+  item_in_cart[:count] = gets.chomp.to_f
 
-	cart[name] = item_in_cart
+  cart[name] = item_in_cart
 end
 
 summ = 0
-cart.each{ |key,item| 
-	p "#{key} в количестве #{item[:count]} общей стоимостью #{item[:count] * item[:price]}"
-	summ += item[:count] * item[:price]
-}
-p "---------" 
+cart.each do |key, item|
+  p "#{key} в количестве #{item[:count]} общей стоимостью #{item[:count] * item[:price]}"
+  summ += item[:count] * item[:price]
+end
+p '---------'
 p "Общая стоимость товаров - #{summ}"

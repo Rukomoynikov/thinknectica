@@ -35,7 +35,7 @@ describe 'Поезд' do
   end
 
   it 'может тормозить' do
-    train.stop()
+    train.stop
     expect(train.speed).to eq(0)
   end
 
@@ -60,5 +60,4 @@ describe 'Поезд' do
     train.route = oktyabrskaya_doroga
     expect(train.route).to be_instance_of(Route)
   end
-
 end

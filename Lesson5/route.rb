@@ -7,7 +7,7 @@
 class Route
   attr_accessor :first_station, :last_station, :stations
 
-  def initialize (first_station, last_station)
+  def initialize(first_station, last_station)
     @first_station = first_station
     @last_station = last_station
     @stations = [@first_station, @last_station]
@@ -24,10 +24,9 @@ class Route
 
   def to_s
     p "Информиация о маршруте"
-    p "--------------"
+    p '--------------'
     p "Первая станция #{@first_station.name}"
-    stations.each{ |station| p "Промежуточная станция #{station.name}" }
+    stations.each { |station| p "Промежуточная станция #{station.name}" }
     "Последняя станция #{@last_station.name}"
   end
-
 end

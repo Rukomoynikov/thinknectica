@@ -1,17 +1,17 @@
-require "./modules/manufacturer"
-require "./modules/validator"
+require './modules/manufacturer'
+require './modules/validator'
 
 class Carriage
   extend Validator
   include Manufacturer
 
-  def initialize(manufacturer = "Untitled carriage manufacturer")
-  	@manufacturer = manufacturer 
+  def initialize(manufacturer = 'Untitled carriage manufacturer')
+    @manufacturer = manufacturer
     validate!
   end
 
   def self.debug(message)
-  	p "DEBUG!!!! #{message}"
+    p "DEBUG!!!! #{message}"
   end
 
   def to_s
@@ -19,29 +19,26 @@ class Carriage
   end
 
   def validate!
-    begin
-      valid?
-    rescue Exception => e
-      p "Carriage is not valid"
-      p "Reason is: #{e}"
-      raise
-    end
+    valid?
+  rescue Exception => e
+    p 'Carriage is not valid'
+    p "Reason is: #{e}"
+    raise
   end
 
-  private 
+  private
 
   def valid?
-    raise "Carriage havent manufacturer"  if @manufacturer.nil?
-    raise "Carriage havent type" if self.class.to_s !~ /PassengerCarriage|CargoCarriage/
-    return true
+    raise 'Carriage havent manufacturer' if @manufacturer.nil?
+    raise 'Carriage havent type' if self.class.to_s !~ /PassengerCarriage|CargoCarriage/
+    true
   end
-
 end
 
 class PassengerCarriage < Carriage
-  TYPE ="пассажирский"
+  TYPE = "пассажирский".freeze
 end
 
 class CargoCarriage < Carriage
-  TYPE ="грузовой"
+  TYPE = "грузовой".freeze
 end

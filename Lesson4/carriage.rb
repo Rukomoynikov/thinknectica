@@ -5,9 +5,9 @@ class Carriage
 end
 
 class PassengerCarriage < Carriage
-  TYPE ="пассажирский"
+  TYPE = "пассажирский".freeze
 end
 
 class CargoCarriage < Carriage
-  TYPE ="грузовой"
+  TYPE = "грузовой".freeze
 end

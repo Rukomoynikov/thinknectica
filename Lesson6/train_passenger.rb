@@ -1,5 +1,5 @@
-require "./train"
+require './train'
 
 class TrainPassenger < Train
-  TYPE_NAME = "Пассажирский"
+  TYPE_NAME = "Пассажирский".freeze
 end

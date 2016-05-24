@@ -61,5 +61,4 @@ class Train
       @route.stations.at(@station_index).receive_train(self)
     end
   end
-
 end

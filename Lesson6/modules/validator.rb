@@ -1,11 +1,10 @@
 module Validator
-
   def valid_length?(minimum, maximum, word)
-    if word.length < minimum 
+    if word.length < minimum
       raise "Length of #{word} is too small"
     elsif word.length > maximum
       raise "Length of #{word} is too large"
-    else 
+    else
       return true
     end
   end
@@ -13,7 +12,7 @@ module Validator
   def valid_instance?(class_name, object)
     if class_name == object.class
       return true
-    else 
+    else
       raise "Object is not instance of #{class_name}"
     end
   end
@@ -26,7 +25,6 @@ module Validator
     else
       raise "The template #{template} not a string neither a regexp"
     end
-    return true
+    true
   end
-
 end
