@@ -3,17 +3,6 @@ require './station'
 require './route'
 require './carriage'
 
-# mode = ""
-#
-# p "Панель управления"
-# while mode == ""
-#   p "Выберите необходимое действие:"
-#   p "(1) Создать новую станцию"
-#   p "(2) Создать новую дорогу"
-#
-#   mode = gets.chomp.to_i
-# end
-
 moskva = Station.new("Москва")
 bolshevo = Station.new("Болешво")
 

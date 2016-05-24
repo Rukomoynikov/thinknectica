@@ -15,8 +15,10 @@ class Carriage
   end
 
   def to_s
-    available = self.class::TYPE == "грузовой" ? "свободный объём #{available_volume}" : "свободных мест #{available_seats}"
-    occupied = self.class::TYPE == "грузовой" ? "занятый объём #{filled_volume}" : "занято мест #{occupied_seats}"
+    available = self.class::TYPE == "грузовой" ? 
+      "свободный объём #{available_volume}" : "свободных мест #{available_seats}"
+    occupied = self.class::TYPE == "грузовой" ? 
+      "занятый объём #{filled_volume}" : "занято мест #{occupied_seats}"
     p "Вагон типа #{self.class::TYPE} #{available} и #{occupied}"
   end
 

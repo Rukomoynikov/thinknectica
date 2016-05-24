@@ -1,10 +1,5 @@
 require('./station.rb')
 require './modules/validator'
-# Класс Route (Маршрут):
-# Имеет начальную и конечную станцию, а также список промежуточных станций. Начальная и конечная станции указываютсся при создании маршрута, а промежуточные могут добавляться между ними.
-# Может добавлять промежуточную станцию в список
-# Может удалять промежуточную станцию из списка
-# Может выводить список всех станций по-порядку от начальной до конечной
 
 class Route
   extend Validator
@@ -33,9 +28,7 @@ class Route
       unless station.trains.empty?
         station.map_trains do |train|
           p "Поезд номер #{train.index}, тип #{train.class::TYPE_NAME}, количество вагонов #{train.carriages.length}"
-          train.map_carriages do |carriage, _index|
-            carriage.to_s
-          end
+          train.map_carriages {|carriage, _index| carriage.to_s}
         end
       end
       p '>>>>>>>>>>'
