@@ -43,11 +43,6 @@ class Station
   end
 
   def map_trains
-    # block.call(@trains[0])
-    # @trains.each do |train|
-    # 	return block.call(train)
-    # 	# В этом месте я не понял, если не делать return то выводится полная информация о поезде.
-    # end
     @trains.each { |train| return yield train }
   end
 

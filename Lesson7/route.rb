@@ -22,16 +22,15 @@ class Route
 
   def to_s
     p "Информация о маршруте"
-    p '---------------------'
     stations.each do |station|
       p "Станция - #{station.name}"
       unless station.trains.empty?
         station.map_trains do |train|
-          p "Поезд номер #{train.index}, тип #{train.class::TYPE_NAME}, количество вагонов #{train.carriages.length}"
-          train.map_carriages {|carriage, _index| carriage.to_s}
+          p "Поезд номер #{train.index}, тип #{train.class::TYPE_NAME},"\
+            " количество вагонов #{train.carriages.length}"
+          train.map_carriages { |carriage, _index| carriage.to_s }
         end
       end
-      p '>>>>>>>>>>'
     end
   end
 

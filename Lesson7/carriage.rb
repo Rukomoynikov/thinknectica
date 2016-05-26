@@ -15,10 +15,8 @@ class Carriage
   end
 
   def to_s
-    available = self.class::TYPE == "грузовой" ? 
-      "свободный объём #{available_volume}" : "свободных мест #{available_seats}"
-    occupied = self.class::TYPE == "грузовой" ? 
-      "занятый объём #{filled_volume}" : "занято мест #{occupied_seats}"
+    available = self.class::TYPE == "грузовой" ?  "свободный объём #{available_volume}" : "свободных мест #{available_seats}"
+    occupied = self.class::TYPE == "грузовой" ? "занятый объём #{filled_volume}" : "занято мест #{occupied_seats}"
     p "Вагон типа #{self.class::TYPE} #{available} и #{occupied}"
   end
 
@@ -31,8 +29,11 @@ class Carriage
   private
 
   def validate!
-    raise 'Carriage havent manufacturer' if @manufacturer.nil?
-    raise 'Carriage havent type' if self.class.to_s !~ /PassengerCarriage|CargoCarriage/
+    if self.class.to_s !~ /PassengerCarriage|CargoCarriage/
+      raise 'Carriage havent type'
+    elsif @manufacturer.nil?
+      raise 'Carriage havent manufacturer'
+    end
     true
   end
 end
