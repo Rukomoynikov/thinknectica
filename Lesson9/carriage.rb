@@ -1,14 +1,14 @@
 require './modules/manufacturer'
-require './modules/validator'
+require './modules/validation'
 require './modules/acessors'
 
 class Carriage
-  extend Validator
+  extend Validation
   extend Acessors
   include Manufacturer
 
   attr_accessor_with_history :color
-  strong_attr_acessor :title
+  strong_attr_acessor :title, String
 
   def initialize(manufacturer = 'Untitled carriage manufacturer')
     @manufacturer = manufacturer
@@ -25,22 +25,23 @@ class Carriage
     p "Вагон типа #{self.class::TYPE} #{available} и #{occupied}"
   end
 
-  def valid?
-    validate!
-  rescue
-    false
-  end
+  # def valid?
+  #   validate!
+  # rescue
+  #   false
+  # end
 
-  private
+  # private
 
-  def validate!
-    if self.class.to_s !~ /PassengerCarriage|CargoCarriage/
-      raise 'Carriage havent type'
-    elsif @manufacturer.nil?
-      raise 'Carriage havent manufacturer'
-    end
-    true
-  end
+  # def validate!
+  #   if self.class.to_s !~ /PassengerCarriage|CargoCarriage/
+  #     raise 'Carriage havent type'
+  #   elsif @manufacturer.nil?
+  #     raise 'Carriage havent manufacturer'
+  #   end
+  #   true
+  # end
+
 end
 
 class PassengerCarriage < Carriage
@@ -98,9 +99,9 @@ class CargoCarriage < Carriage
 end
 
 car = CargoCarriage.new("IBM", 10)
-# p car.methods
-# p car.instance_variables
-car.color ="Black"
-car.color ="White"
-car.color
-p car.color_history
+# car.color ="Black"
+# car.color ="White"
+# car.color
+# p car.color_history
+# car.title = 'Train is 1'
+# p car.color_title

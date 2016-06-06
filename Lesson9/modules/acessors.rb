@@ -25,7 +25,18 @@ module Acessors
 	end
 
 	def strong_attr_acessor(attr_name, type)
-		if attr_name.type.is_a(type)
+		# if attr_name.type.is_a(type)
+		var_name = "@#{attr_name}".to_sym
+
+		define_method(attr_name) do
+			instance_variable_get(var_name)
+		end
+
+		define_method("#{attr_name}=") do |value|
+			raise "New value is not a required type #{type}" if !value.is_a?(type) 
+			instance_variable_set(var_name, value)
+		end
+
 	end
 
 end
