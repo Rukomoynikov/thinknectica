@@ -7,17 +7,14 @@ class Carriage
   extend Acessors
   include Manufacturer
 
+  def initialize(manufacturer = 'Untitled manufacturer')
+    @manufacturer = manufacturer
+  end
+
   attr_accessor_with_history :color
   strong_attr_acessor :title, String
-
-  def initialize(manufacturer = 'Untitled carriage manufacturer')
-    @manufacturer = manufacturer
-    validate!
-  end
-
-  def self.debug(message)
-    p "DEBUG!!!! #{message}"
-  end
+  validate :manufacturer, :presence
+  validate :manufacturer, :format, /IBM{1,3}/
 
   def to_s
     available = self.class::TYPE == "грузовой" ?  "свободный объём #{available_volume}" : "свободных мест #{available_seats}"

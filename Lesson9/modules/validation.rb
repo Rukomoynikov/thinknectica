@@ -28,8 +28,17 @@ module Validation
   #   true
   # end
 
-  def validate (attr_name, type)
-    p type
+  def validate (attr_name, validation_type, *validation_detail)
+    # presence, format, type
+    var_name = "@#{attr_name}".to_sym
+
+    if validation_type == :presence
+      instance_variable_get(var_name).nil?
+    elsif validation_type == :format
+      instance_variable_get(var_name) =~ /#{validation_detail[0]}/
+    elsif validation_type == :type
+      true
+    end
   end
 
   def validate!
